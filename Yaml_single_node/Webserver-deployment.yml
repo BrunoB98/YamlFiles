@@ -1,0 +1,41 @@
+apiVersion: apps/v1 # for versions before 1.8.0 use apps/v1beta1
+kind: Deployment
+metadata:
+  name: webserver
+  labels:
+    app: webserver
+spec:
+  selector:
+    matchLabels:
+      app: webserver
+      tier: frontend
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: webserver
+        tier: frontend
+    spec:
+      containers:
+      - image: triennaltesin98/tomcat:1.5.8
+        name: webserver
+        env:
+        - name: APPDB_USER
+          value: "BrunoB"
+        - name: APPDB_PASS
+          value: "ciao77BB"
+        - name: APPDB_NAME
+          value: "shopping"
+        ports:
+        - containerPort: 80
+          protocol: TCP
+          name: webserver
+        volumeMounts:
+        - name: webserver-persistent-storage
+          mountPath: /var/www/html
+      volumes:
+      - name: webserver-persistent-storage
+        persistentVolumeClaim:
+          claimName: ws-pv-claim
+      restartPolicy: Always

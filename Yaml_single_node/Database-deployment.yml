@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: appdb
+  labels:
+    app: appdb
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: appdb
+  template:
+    metadata:
+      labels:
+        app: appdb
+    spec:
+      containers:
+      - env:
+        - name: MYSQL_USER
+          value: BrunoB
+        - name: MYSQL_PASSWORD
+          value: ciao77BB
+        - name: MYSQL_ROOT_PASSWORD
+          value: Bruno_B98
+        - name: MYSQL_DATABASE
+          value: shopping
+        image: mysql:5.6
+        imagePullPolicy: Always
+        name: appdb
+        ports:
+        - containerPort: 3306
+          protocol: TCP
+        volumeMounts:
+        - name: appdb-persistent-storage
+          mountPath: /var/lib/mysql
+      volumes:
+      - name: appdb-persistent-storage
+        persistentVolumeClaim:
+          claimName: appdb-pv-claim
+      restartPolicy: Always
