@@ -25,13 +25,25 @@ spec:
         name: appdb
         env:
         - name: MYSQL_USER
-          value: BrunoB
+          valueFrom:
+            secretKeyRef:
+              name: mysql-config
+              key: username
         - name: MYSQL_PASSWORD
-          value: ciao77BB
-        - name: MYSQL_ROOT_PASSWORD
-          value: Bruno_B98
+          valueFrom:
+            secretKeyRef:
+              name: mysql-config
+              key: password
         - name: MYSQL_DATABASE
-          value: shoppingBB
+          valueFrom:
+            secretKeyRef:
+              name: mysql-config
+              key: dbname
+        - name: MYSQL_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mysql-root-password
+              key: password
         ports:
         - containerPort: 32543
           protocol: TCP

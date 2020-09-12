@@ -25,11 +25,20 @@ spec:
         name: webserver
         env:
         - name: APPDB_USER
-          value: "BrunoB"
+          valueFrom:
+            secretKeyRef:
+              name: mysql-config
+              key: username
         - name: APPDB_PASS
-          value: "ciao77BB"
+          valueFrom:
+            secretKeyRef:
+              name: mysql-config
+              key: password
         - name: APPDB_NAME
-          value: "shoppingBB"
+          valueFrom:
+            secretKeyRef:
+              name: mysql-config
+              key: dbname
         ports:
         - containerPort: 80
           protocol: TCP
