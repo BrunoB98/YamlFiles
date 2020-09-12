@@ -36,7 +36,7 @@ spec:
           values:
           - node2
   capacity:
-    storage: 3Gi
+    storage: 1Gi
   accessModes:
     - ReadWriteOnce
   hostPath:
