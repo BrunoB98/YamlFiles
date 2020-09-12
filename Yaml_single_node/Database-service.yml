@@ -1,10 +1,13 @@
-kind: Service
 apiVersion: v1
+kind: Service
 metadata:
   name: appdb
+  labels:
+    app: appdb
 spec:
   selector:
     app: appdb
+    tier: backend
   ports:
     - name: mysql
       protocol: TCP

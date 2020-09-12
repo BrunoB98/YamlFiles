@@ -9,13 +9,19 @@ spec:
   selector:
     matchLabels:
       app: appdb
+      tier: backend
+  strategy:
+    type: Recreate
   template:
     metadata:
       labels:
         app: appdb
+        tier: backend
     spec:
       containers:
-      - env:
+      - image: mysql:5.6
+        name: appdb
+        env:
         - name: MYSQL_USER
           value: BrunoB
         - name: MYSQL_PASSWORD
@@ -24,9 +30,6 @@ spec:
           value: Bruno_B98
         - name: MYSQL_DATABASE
           value: shopping
-        image: mysql:5.6
-        imagePullPolicy: Always
-        name: appdb
         ports:
         - containerPort: 3306
           protocol: TCP

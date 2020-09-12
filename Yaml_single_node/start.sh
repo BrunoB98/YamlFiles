@@ -8,7 +8,7 @@ kubectl apply -f Local-volumes.yml
 kubectl apply -f Database-pvc.yml
 kubectl apply -f Database-deployment.yml
 kubectl apply -f Database-service.yml
-kubectl apply -f Webserver-pvc.yml
+#kubectl apply -f Webserver-pvc.yml
 kubectl apply -f Webserver-service.yml
 kubectl apply -f Webserver-deployment.yml
 minikube service webserver --url
