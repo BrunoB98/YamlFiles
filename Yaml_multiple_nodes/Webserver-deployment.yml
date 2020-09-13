@@ -40,7 +40,7 @@ spec:
               name: mysql-config
               key: dbname
         ports:
-        - containerPort: 80
+        - containerPort: 8080
           protocol: TCP
           name: webserver
       restartPolicy: Always
